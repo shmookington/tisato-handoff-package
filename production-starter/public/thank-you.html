@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking Request Received | TISATO</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="center-page">
+  <main class="success-card">
+    <img src="/assets/tisato-logo-stacked.png" alt="TISATO Transportation Services">
+    <p class="eyebrow">Request received</p>
+    <h1>Your booking request has been submitted.</h1>
+    <p>Dispatch can now review this request in the admin portal. Confirmation emails are written to the server outbox for provider integration.</p>
+    <p class="booking-id">Booking ID: <span id="bookingId">Pending</span></p>
+    <div class="hero-actions compact">
+      <a class="button primary" href="/">Submit Another Request</a>
+      <a class="button secondary" href="/admin.html">Open Admin Portal</a>
+    </div>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("bookingId").textContent = params.get("bookingId") || "Unavailable";
+  </script>
+</body>
+</html>

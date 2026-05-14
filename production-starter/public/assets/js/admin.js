@@ -1,0 +1,192 @@
+const loginPanel = document.getElementById("loginPanel");
+const dashboardPanel = document.getElementById("dashboardPanel");
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+const dashboardMessage = document.getElementById("dashboardMessage");
+const bookingTable = document.getElementById("bookingTable");
+const metrics = document.getElementById("metrics");
+const logoutButton = document.getElementById("logoutButton");
+const refreshButton = document.getElementById("refreshButton");
+
+const statuses = [
+  "pending",
+  "needs_information",
+  "confirmed",
+  "in_progress",
+  "completed",
+  "cancelled",
+];
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function setLoginMessage(text, type = "") {
+  loginMessage.textContent = text;
+  loginMessage.className = `form-message ${type}`.trim();
+}
+
+function setDashboardMessage(text, type = "") {
+  dashboardMessage.textContent = text;
+  dashboardMessage.className = `form-message ${type}`.trim();
+}
+
+function setAuthed(isAuthed) {
+  loginPanel.hidden = isAuthed;
+  dashboardPanel.hidden = !isAuthed;
+  logoutButton.hidden = !isAuthed;
+}
+
+async function requestJson(path, options = {}) {
+  const response = await fetch(path, {
+    credentials: "same-origin",
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
+  });
+  const result = await response.json();
+  if (!response.ok || result.success === false) {
+    throw new Error(result.error || "Request failed.");
+  }
+  return result;
+}
+
+function statusOptions(current) {
+  return statuses
+    .map((status) => `<option value="${status}" ${status === current ? "selected" : ""}>${status.replaceAll("_", " ")}</option>`)
+    .join("");
+}
+
+function renderMetrics(bookings) {
+  const counts = bookings.reduce((accumulator, booking) => {
+    accumulator[booking.status] = (accumulator[booking.status] || 0) + 1;
+    return accumulator;
+  }, {});
+
+  metrics.innerHTML = [
+    ["Total", bookings.length],
+    ["Pending", counts.pending || 0],
+    ["Confirmed", counts.confirmed || 0],
+    ["Completed", counts.completed || 0],
+  ]
+    .map(([label, value]) => `<article class="metric"><span>${label}</span><strong>${value}</strong></article>`)
+    .join("");
+}
+
+function renderBookings(bookings) {
+  if (!bookings.length) {
+    bookingTable.innerHTML = "<p>No booking requests have been submitted yet.</p>";
+    return;
+  }
+
+  bookingTable.innerHTML = bookings
+    .map((booking) => {
+      const passenger = `${booking.passenger.firstName} ${booking.passenger.lastName}`;
+      return `
+        <article class="booking-row" data-booking-id="${escapeHtml(booking.id)}">
+          <div>
+            <span class="status-pill">${escapeHtml(booking.status.replaceAll("_", " "))}</span>
+            <h3>${escapeHtml(passenger)}</h3>
+            <div class="booking-meta">
+              <span>${escapeHtml(booking.id)}</span>
+              <span>${escapeHtml(booking.passenger.phone)}</span>
+              <span>${escapeHtml(booking.trip.pickupDate)} ${escapeHtml(booking.trip.pickupTime)}</span>
+              <span>${escapeHtml(booking.trip.serviceType)}</span>
+            </div>
+            <p><strong>Pickup:</strong> ${escapeHtml(booking.trip.pickupAddress)}</p>
+            <p><strong>Drop-off:</strong> ${escapeHtml(booking.trip.dropoffAddress)}</p>
+            <p>${escapeHtml(booking.trip.notes || "No notes provided.")}</p>
+          </div>
+          <div class="row-actions">
+            <label>
+              Status
+              <select data-status>${statusOptions(booking.status)}</select>
+            </label>
+            <label>
+              Admin note
+              <textarea data-note rows="3" placeholder="Optional internal note"></textarea>
+            </label>
+            <button class="button primary" type="button" data-update>Update Booking</button>
+          </div>
+        </article>`;
+    })
+    .join("");
+}
+
+async function loadBookings() {
+  setDashboardMessage("Loading bookings...");
+  const result = await requestJson("/api/admin/bookings");
+  renderMetrics(result.bookings);
+  renderBookings(result.bookings);
+  setDashboardMessage(`Loaded ${result.bookings.length} booking request(s).`, "success");
+}
+
+async function boot() {
+  try {
+    await requestJson("/api/admin/me");
+    setAuthed(true);
+    await loadBookings();
+  } catch {
+    setAuthed(false);
+  }
+}
+
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  setLoginMessage("Checking credentials...");
+
+  try {
+    await requestJson("/api/admin/login", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(new FormData(loginForm).entries())),
+    });
+    setLoginMessage("Logged in.", "success");
+    setAuthed(true);
+    await loadBookings();
+  } catch (error) {
+    setLoginMessage(error.message, "error");
+  }
+});
+
+logoutButton.addEventListener("click", async () => {
+  await requestJson("/api/admin/logout", { method: "POST", body: "{}" });
+  setAuthed(false);
+});
+
+refreshButton.addEventListener("click", () => {
+  loadBookings().catch((error) => setDashboardMessage(error.message, "error"));
+});
+
+bookingTable.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-update]");
+  if (!button) return;
+
+  const row = button.closest("[data-booking-id]");
+  const bookingId = row.dataset.bookingId;
+  const status = row.querySelector("[data-status]").value;
+  const note = row.querySelector("[data-note]").value;
+
+  button.disabled = true;
+  setDashboardMessage(`Updating ${bookingId}...`);
+
+  try {
+    await requestJson(`/api/admin/bookings/${encodeURIComponent(bookingId)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ status, note }),
+    });
+    await loadBookings();
+  } catch (error) {
+    setDashboardMessage(error.message, "error");
+  } finally {
+    button.disabled = false;
+  }
+});
+
+boot();

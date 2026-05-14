@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TISATO Transportation Services</title>
+  <meta name="description" content="Non-emergency medical transportation booking starter for TISATO Transportation Services.">
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="/assets/tisato-logo-header.png" alt="TISATO Transportation Services">
+    </a>
+    <nav class="nav">
+      <a href="#services">Services</a>
+      <a href="#booking">Book a Ride</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Professional transportation coordination</p>
+        <h1>Reliable medical transportation requests with a real booking workflow behind it.</h1>
+        <p class="lead">This starter app captures ride requests, stores them server-side, queues admin and passenger email files, and gives dispatch a protected admin portal.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#booking">Request Transportation</a>
+          <a class="button secondary" href="tel:+18448847286">Call 844-884-7286</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <p class="panel-label">Live workflow included</p>
+        <ul>
+          <li>Booking API endpoint</li>
+          <li>Admin authentication</li>
+          <li>Status update system</li>
+          <li>Email outbox automation</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="services">
+      <p class="eyebrow">Services</p>
+      <h2>Transportation categories prepared for production scheduling.</h2>
+      <div class="service-grid">
+        <article>
+          <h3>Ambulatory Trips</h3>
+          <p>Point-to-point transportation for passengers who can walk with minimal assistance.</p>
+        </article>
+        <article>
+          <h3>Wheelchair Transportation</h3>
+          <p>Request capture includes mobility notes, stairs, companion needs, and equipment flags.</p>
+        </article>
+        <article>
+          <h3>Medical Courier</h3>
+          <p>The code supports a courier service type so the workflow can expand beyond passengers.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="booking-shell" id="booking">
+      <div>
+        <p class="eyebrow">Booking System</p>
+        <h2>Submit a real server-side booking request.</h2>
+        <p>The form below posts to <code>/api/bookings</code>. Successful submissions are saved in <code>data/bookings.json</code> and visible in the admin portal.</p>
+      </div>
+
+      <form class="booking-form" id="bookingForm" novalidate>
+        <div class="form-grid two">
+          <label>
+            First name
+            <input name="firstName" autocomplete="given-name" required>
+          </label>
+          <label>
+            Last name
+            <input name="lastName" autocomplete="family-name" required>
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email">
+          </label>
+          <label>
+            Phone
+            <input name="phone" autocomplete="tel" required>
+          </label>
+        </div>
+
+        <div class="form-grid two">
+          <label>
+            Pickup date
+            <input name="pickupDate" type="date" required>
+          </label>
+          <label>
+            Pickup time
+            <input name="pickupTime" type="time" required>
+          </label>
+        </div>
+
+        <label>
+          Pickup address
+          <input name="pickupAddress" autocomplete="street-address" required>
+        </label>
+        <label>
+          Drop-off address
+          <input name="dropoffAddress" required>
+        </label>
+
+        <div class="form-grid two">
+          <label>
+            Service type
+            <select name="serviceType">
+              <option value="ambulatory">Ambulatory</option>
+              <option value="wheelchair">Wheelchair</option>
+              <option value="stretcher">Stretcher</option>
+              <option value="medical-courier">Medical courier</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>
+            Appointment time
+            <input name="appointmentTime" placeholder="Optional">
+          </label>
+        </div>
+
+        <fieldset class="check-grid">
+          <legend>Trip details</legend>
+          <label><input type="checkbox" name="returnTrip"> Return trip requested</label>
+          <label><input type="checkbox" name="wheelchair"> Wheelchair</label>
+          <label><input type="checkbox" name="oxygen"> Oxygen</label>
+          <label><input type="checkbox" name="companion"> Companion riding along</label>
+          <label><input type="checkbox" name="stairs"> Stairs involved</label>
+        </fieldset>
+
+        <label>
+          Notes for dispatch
+          <textarea name="notes" rows="5" placeholder="Pickup instructions, medical appointment notes, special handling, or timing details."></textarea>
+        </label>
+
+        <label class="terms"><input type="checkbox" name="acceptedTerms" required> I confirm TISATO may contact me about this request.</label>
+
+        <div class="form-footer">
+          <button class="button primary" type="submit">Submit Booking Request</button>
+          <p id="bookingMessage" class="form-message" role="status"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>TISATO Transportation Services INC</p>
+    <p><a href="tel:+18448847286">844-884-7286</a> <span>|</span> <a href="mailto:info@tisatotransportationservices.com">info@tisatotransportationservices.com</a></p>
+  </footer>
+
+  <script src="/assets/js/booking.js" type="module"></script>
+</body>
+</html>

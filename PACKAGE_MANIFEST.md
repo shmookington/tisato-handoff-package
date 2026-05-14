@@ -12,6 +12,25 @@
 - `public-site/robots.txt`
 - `public-site/sitemap.xml`
 
+## Runnable Production Starter Code
+
+- `production-starter/package.json`
+- `production-starter/server.js`
+- `production-starter/src/http/`
+- `production-starter/src/services/`
+- `production-starter/src/storage/`
+- `production-starter/src/security/`
+- `production-starter/src/templates/`
+- `production-starter/src/utils/`
+- `production-starter/public/index.html`
+- `production-starter/public/admin.html`
+- `production-starter/public/thank-you.html`
+- `production-starter/public/assets/css/app.css`
+- `production-starter/public/assets/js/booking.js`
+- `production-starter/public/assets/js/admin.js`
+- `production-starter/scripts/hash-password.js`
+- `production-starter/data/`
+
 ## Business Handoff Documents
 
 - `README_FIRST.md`
@@ -58,4 +77,4 @@
 
 ## Handoff Positioning
 
-The package is intentionally divided into phases. The public static website can be hosted first, while booking, admin, and email automation are implemented using the included production specs. This avoids mixing public website files with private credentials, customer data, and operational systems.
+The package is intentionally divided into phases. The public static website can be hosted first, while `production-starter/` gives developers a runnable implementation of booking, admin, persistence, audit logging, and email automation. The production specs remain included so the starter can be upgraded into a database-backed hosted application without mixing public website files with private credentials, customer data, and operational systems.

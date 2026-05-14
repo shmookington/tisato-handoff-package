@@ -1,6 +1,6 @@
 # Code Deep Dive
 
-This handoff is split into three layers:
+This handoff is split into four layers:
 
 1. `public-site/`
    The hostable static website and prototype interactions.
@@ -8,7 +8,10 @@ This handoff is split into three layers:
 2. `backend-blueprints/`
    Contracts, schemas, workflow maps, and production requirements.
 
-3. `reference-implementation/`
+3. `production-starter/`
+   Runnable Node.js starter code for booking intake, admin sessions, status updates, audit logs, and email outbox automation.
+
+4. `reference-implementation/`
    Annotated Next.js API code showing how the production booking, admin, and email systems should be assembled.
 
 ## Static Site Layer
@@ -62,6 +65,25 @@ The core system is:
 - Email automation for dispatch and passenger notifications.
 - Database persistence for operational records.
 
+## Production Starter Layer
+
+`production-starter/` is the actual executable baseline. It can be run locally with Node.js and does not require third-party packages.
+
+The starter app includes:
+
+- `server.js`: Node HTTP server that wires API routes and static files.
+- `src/http/router.js`: lightweight route matcher with dynamic `:id` parameters.
+- `src/services/bookings.js`: booking creation, validation, rate limiting, audit logging, and email automation orchestration.
+- `src/services/admin.js`: admin login, logout, password checks, signed cookies, and protected route access.
+- `src/storage/json-store.js`: atomic JSON read/write boundary that can later be replaced with a database.
+- `src/security/passwords.js`: PBKDF2 password hashing and timing-safe verification.
+- `src/security/sessions.js`: signed admin session cookies with expiration.
+- `src/templates/email-templates.js`: HTML templates for dispatch notifications and passenger updates.
+- `public/assets/js/booking.js`: browser booking form submission to the real API.
+- `public/assets/js/admin.js`: admin dashboard fetching protected bookings and sending status updates.
+
+This layer deliberately stores demo runtime data in `production-starter/data/`. That makes the workflow reviewable without requiring database credentials. For production, the storage modules should be swapped for Postgres, Supabase, Neon, or another managed database.
+
 ## Reference Implementation Layer
 
 The reference implementation is a staged Next.js API build. It is intentionally organized as code modules:
@@ -92,4 +114,3 @@ Before the dynamic systems go live, the client should confirm:
 - Passenger data is not exposed in public files.
 - Status changes are logged.
 - The static demo behavior has been removed or disabled.
-
