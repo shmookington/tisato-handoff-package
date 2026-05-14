@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Prototype | TISATO Transportation Services</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <header class="admin-header">
+      <div>
+        <p class="section-kicker">Static Prototype</p>
+        <h1>Booking Admin Portal</h1>
+      </div>
+      <a class="button secondary" href="index.html">View Site</a>
+    </header>
+
+    <main class="admin-shell">
+      <aside class="admin-sidebar">
+        <strong>Prototype Scope</strong>
+        <p>
+          This page reads demo bookings from browser storage. A production admin portal must use
+          authentication, a database, audit logs, and role-based access.
+        </p>
+        <button class="button secondary full" id="seedDemo">Add Demo Booking</button>
+        <button class="button danger full" id="clearDemo">Clear Demo Data</button>
+      </aside>
+
+      <section class="admin-content">
+        <div class="metric-grid">
+          <div>
+            <span>Total Requests</span>
+            <strong id="metricTotal">0</strong>
+          </div>
+          <div>
+            <span>Pending</span>
+            <strong id="metricPending">0</strong>
+          </div>
+          <div>
+            <span>Recurring</span>
+            <strong id="metricRecurring">0</strong>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Passenger</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Pickup</th>
+                <th>Destination</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookingRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/js/admin.js"></script>
+  </body>
+</html>

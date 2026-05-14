@@ -1,0 +1,34 @@
+{
+  "booking": {
+    "id": "string, unique, example TSC-48392",
+    "status": "pending | reviewed | confirmed | needs_information | cancelled | completed",
+    "source": "website",
+    "passenger": {
+      "name": "string",
+      "phone": "string",
+      "email": "string",
+      "mobility": "string"
+    },
+    "trip": {
+      "pickup": "string",
+      "destination": "string",
+      "date": "YYYY-MM-DD",
+      "time": "HH:mm",
+      "type": "one-way | round-trip | recurring"
+    },
+    "insurance": "string",
+    "notes": "string",
+    "consent": {
+      "sms": "boolean",
+      "email": "boolean",
+      "capturedAt": "ISO date string",
+      "source": "website booking form"
+    },
+    "audit": {
+      "createdAt": "ISO date string",
+      "updatedAt": "ISO date string",
+      "reviewedAt": "ISO date string or null",
+      "reviewedBy": "admin user id or null"
+    }
+  }
+}

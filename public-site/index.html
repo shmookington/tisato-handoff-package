@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TISATO Transportation Services | Non-Emergency Medical Transportation</title>
+    <meta
+      name="description"
+      content="TISATO Transportation Services provides reliable non-emergency medical transportation for appointments, dialysis, therapy, hospital discharge, and related care trips in Central Florida."
+    >
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="TISATO home">
+        <img src="assets/img/tisato-logo-header.png" alt="TISATO Transportation Services">
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#booking">Book</a>
+        <a href="#faq">FAQs</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="header-call" href="tel:+18448847286">Call (844) 884-7286</a>
+    </header>
+
+    <main id="top">
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="section-kicker">Central Florida NEMT</p>
+          <h1 id="hero-title">Transportation should never stand in the way of care.</h1>
+          <p>
+            TISATO provides dependable, compassionate transportation for medical visits,
+            recurring dialysis, therapy, hospital discharge, and mobility-assisted care trips.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#booking">Schedule a Ride</a>
+            <a class="button secondary" href="tel:+18448847286">Call Dispatch</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Ride coordination summary">
+          <div class="panel-topline">Care in Motion</div>
+          <dl>
+            <div>
+              <dt>Response Window</dt>
+              <dd>Confirmation within business hours</dd>
+            </div>
+            <div>
+              <dt>Ride Types</dt>
+              <dd>One-time, round trip, and recurring</dd>
+            </div>
+            <div>
+              <dt>Passenger Support</dt>
+              <dd>Door-to-door assistance and mobility care</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Service highlights">
+        <div>
+          <strong>ADA-focused</strong>
+          <span>Mobility-aware passenger handling</span>
+        </div>
+        <div>
+          <strong>Recurring care ready</strong>
+          <span>Dialysis, therapy, and regular visits</span>
+        </div>
+        <div>
+          <strong>Family operated</strong>
+          <span>Direct, accountable communication</span>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Services</p>
+          <h2>Transportation to and from the care that matters.</h2>
+        </div>
+        <div class="service-grid">
+          <article>
+            <h3>Medical Appointments</h3>
+            <p>Reliable rides for routine visits, specialist appointments, checkups, and follow-up care.</p>
+          </article>
+          <article>
+            <h3>Dialysis Centers</h3>
+            <p>Recurring transportation designed around consistent treatment schedules and dependable pickup windows.</p>
+          </article>
+          <article>
+            <h3>Therapy Sessions</h3>
+            <p>Support for physical, occupational, speech, rehab, and outpatient therapy transportation.</p>
+          </article>
+          <article>
+            <h3>Hospital Discharge</h3>
+            <p>Coordinated pickup support for discharge rides, care transitions, and facility-to-home trips.</p>
+          </article>
+          <article>
+            <h3>Pharmacy Trips</h3>
+            <p>Simple transportation for prescription pickup and other healthcare-related errands.</p>
+          </article>
+          <article>
+            <h3>Adult Day Care</h3>
+            <p>Dependable pickup and drop-off support for regular daytime care programs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="booking" class="section booking-section">
+        <div class="booking-copy">
+          <p class="section-kicker">Booking Request</p>
+          <h2>Start the ride request.</h2>
+          <p>
+            This static handoff includes a client-side booking demo. Production booking delivery
+            must be connected through the backend blueprint in this package before launch.
+          </p>
+          <ul class="check-list">
+            <li>Captures passenger, trip, mobility, and consent details.</li>
+            <li>Stores demo requests locally for the included admin prototype.</li>
+            <li>Maps directly to the included backend API contract.</li>
+          </ul>
+        </div>
+
+        <form class="booking-form" id="bookingForm" action="thank-you.html">
+          <div class="form-row">
+            <label>
+              Full Name
+              <input name="name" type="text" autocomplete="name" required>
+            </label>
+            <label>
+              Phone
+              <input name="phone" type="tel" autocomplete="tel" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              Mobility Needs
+              <select name="mobility">
+                <option value="">Select one</option>
+                <option>Walking</option>
+                <option>Wheelchair</option>
+                <option>Stretcher</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Pickup Address
+            <input name="pickup" type="text" autocomplete="street-address" required>
+          </label>
+          <label>
+            Destination Address
+            <input name="destination" type="text" required>
+          </label>
+          <div class="form-row">
+            <label>
+              Ride Date
+              <input name="date" type="date" required>
+            </label>
+            <label>
+              Ride Time
+              <input name="time" type="time" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              Trip Type
+              <select name="tripType">
+                <option>One-way</option>
+                <option>Round trip</option>
+                <option>Recurring</option>
+              </select>
+            </label>
+            <label>
+              Insurance / Payment
+              <input name="insurance" type="text" placeholder="Medicaid, private insurance, self-pay">
+            </label>
+          </div>
+          <label>
+            Additional Notes
+            <textarea name="notes" rows="4"></textarea>
+          </label>
+          <label class="consent-line">
+            <input name="smsConsent" type="checkbox">
+            <span>I agree TISATO may contact me about this ride request by phone, text, or email. Message and data rates may apply.</span>
+          </label>
+          <button class="button primary full" type="submit">Submit Ride Request</button>
+          <p class="form-note">For immediate assistance, call <a href="tel:+18448847286">(844) 884-7286</a>.</p>
+        </form>
+      </section>
+
+      <section id="faq" class="section faq-section">
+        <div class="section-heading">
+          <p class="section-kicker">FAQs</p>
+          <h2>Common rider questions.</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>What is non-emergency medical transportation?</summary>
+            <p>NEMT helps passengers get to medical care when they need extra reliability, mobility support, or care-focused transportation.</p>
+          </details>
+          <details>
+            <summary>How far ahead should a ride be scheduled?</summary>
+            <p>Booking 24 to 48 hours ahead is recommended. Same-day requests may be available depending on scheduling.</p>
+          </details>
+          <details>
+            <summary>Are recurring rides supported?</summary>
+            <p>Yes. Recurring rides are well suited for dialysis, therapy, rehab, adult day care, and repeated medical appointments.</p>
+          </details>
+          <details>
+            <summary>Can insurance cover the ride?</summary>
+            <p>Coverage depends on the passenger plan and benefits. TISATO can help verify options before confirmation.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="about" class="section about-section">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Family-operated transportation with a care-first standard.</h2>
+        </div>
+        <p>
+          TISATO Transportation Services INC supports seniors, wheelchair users, dialysis patients,
+          and individuals with limited mobility across Winter Garden, Clermont, Orlando, and nearby
+          Central Florida communities.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <img src="assets/img/tisato-logo-stacked.png" alt="TISATO Transportation Services">
+      <div>
+        <strong>TISATO Transportation Services INC</strong>
+        <span>4071 LB McLeod Rd, Ste D #220, Orlando, FL 32811</span>
+        <a href="mailto:info@tisatotransportationservices.com">info@tisatotransportationservices.com</a>
+        <a href="tel:+18448847286">(844) 884-7286</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "tisato-booking-admin-reference",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:syntax": "node --check lib/booking-validation.js && node --check lib/booking-ids.js && node --check lib/database.js && node --check lib/email-service.js && node --check lib/auth.js && node --check lib/rate-limit.js && node --check lib/audit-log.js"
+  },
+  "dependencies": {
+    "jose": "^6.0.0"
+  }
+}
