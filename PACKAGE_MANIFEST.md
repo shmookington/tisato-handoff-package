@@ -12,6 +12,18 @@
 - `public-site/robots.txt`
 - `public-site/sitemap.xml`
 
+## Visual Reference Files
+
+- `visual-reference/index.html`
+- `visual-reference/homepage-reference.html`
+- `visual-reference/booking-flow-reference.html`
+- `visual-reference/admin-portal-reference.html`
+- `visual-reference/email-reference.html`
+- `visual-reference/assets/css/visual-reference.css`
+- `visual-reference/assets/js/visual-reference.js`
+- `visual-reference/assets/img/`
+- `visual-reference/README.md`
+
 ## Runnable Production Starter Code
 
 - `production-starter/package.json`
@@ -77,4 +89,4 @@
 
 ## Handoff Positioning
 
-The package is intentionally divided into phases. The public static website can be hosted first, while `production-starter/` gives developers a runnable implementation of booking, admin, persistence, audit logging, and email automation. The production specs remain included so the starter can be upgraded into a database-backed hosted application without mixing public website files with private credentials, customer data, and operational systems.
+The package is intentionally divided into phases. The public static website can be hosted first, `visual-reference/` gives the client and rebuild team a polished screen-by-screen direction, and `production-starter/` gives developers a runnable implementation of booking, admin, persistence, audit logging, and email automation. The production specs remain included so the starter can be upgraded into a database-backed hosted application without mixing public website files with private credentials, customer data, and operational systems.

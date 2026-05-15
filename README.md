@@ -13,6 +13,9 @@ Read `README_FIRST.md` first. It explains how the package is organized and how t
 - `public-site/`
   Static public website files and a demo admin prototype.
 
+- `visual-reference/`
+  Polished reconstructed visual references for the homepage, booking flow, admin portal, and email automation screens.
+
 - `production-starter/`
   Runnable Node.js application with real booking API routes, admin login sessions, server-side JSON persistence, audit logging, and file-based email outbox automation.
 
@@ -40,6 +43,16 @@ public-site/index.html
 ```
 
 The static site can be hosted immediately on Netlify, Vercel, Cloudflare Pages, GitHub Pages, or cPanel-style hosting.
+
+## Visual Reference Preview
+
+Open:
+
+```txt
+visual-reference/index.html
+```
+
+This folder is intended for client review and rebuild alignment. It provides visual direction for implementation rather than source-code recovery.
 
 ## Runnable Starter App
 

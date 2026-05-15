@@ -1,6 +1,6 @@
 # Code Deep Dive
 
-This handoff is split into four layers:
+This handoff is split into five layers:
 
 1. `public-site/`
    The hostable static website and prototype interactions.
@@ -8,10 +8,13 @@ This handoff is split into four layers:
 2. `backend-blueprints/`
    Contracts, schemas, workflow maps, and production requirements.
 
-3. `production-starter/`
+3. `visual-reference/`
+   Polished static visual references for the homepage, booking flow, admin portal, and email automation.
+
+4. `production-starter/`
    Runnable Node.js starter code for booking intake, admin sessions, status updates, audit logs, and email outbox automation.
 
-4. `reference-implementation/`
+5. `reference-implementation/`
    Annotated Next.js API code showing how the production booking, admin, and email systems should be assembled.
 
 ## Static Site Layer
@@ -64,6 +67,20 @@ The core system is:
 - `PATCH /api/admin/bookings/:id` for protected status updates.
 - Email automation for dispatch and passenger notifications.
 - Database persistence for operational records.
+
+## Visual Reference Layer
+
+`visual-reference/` is a client-facing screen reference package. It provides rebuild direction rather than source-code recovery, establishing layout, tone, interaction states, and visual hierarchy.
+
+The folder includes:
+
+- `index.html`: visual reference hub and design system overview.
+- `homepage-reference.html`: public website direction with hero, service cards, process steps, trust messaging, and booking CTA.
+- `booking-flow-reference.html`: multi-step ride request experience with interactive passenger, trip, mobility, and review states.
+- `admin-portal-reference.html`: dispatch portal reference with metrics, booking queue, selected trip details, status controls, and activity log.
+- `email-reference.html`: email automation references for dispatch alerts, passenger confirmations, and passenger status updates.
+- `assets/css/visual-reference.css`: shared design system, layout, responsive behavior, and motion.
+- `assets/js/visual-reference.js`: lightweight interactivity for tabs, booking flow steps, queue preview states, and selectable mobility options.
 
 ## Production Starter Layer
 
